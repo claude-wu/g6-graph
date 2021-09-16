@@ -1,5 +1,7 @@
-export default G6 => {
-  G6.registerBehavior('drag-shadow-node', {
+import { registerBehavior } from '@antv/g6';
+
+export default () => {
+  registerBehavior('drag-shadow-node', {
     getDefaultCfg() {
       return {
         isGragging:        false,

@@ -1,5 +1,7 @@
-export default G6 => {
-  G6.registerBehavior('hover-node', {
+import { registerBehavior } from '@antv/g6';
+
+export default () => {
+  registerBehavior('hover-node', {
     getEvents () {
       return {
         'node:mouseenter': 'onNodeEnter',

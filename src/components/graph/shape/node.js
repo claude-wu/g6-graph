@@ -4,6 +4,7 @@
  * @param {string} icon 图片 url
  * @param {string} labelCfg 文本节点样式
  */
+import { registerNode } from '@antv/g6';
 import defaultStyles from './defaultStyles';
 
 const {
@@ -46,9 +47,9 @@ function getStyle (options, cfg) {
   };
 }
 
-export default G6 => {
+export default () => {
   // 从 base-node 中扩展方形节点
-  G6.registerNode('rect-node', {
+  registerNode('rect-node', {
     shapeType: 'rect',
     // 当前节点的样式集合
     getShapeStyle (cfg) {
@@ -67,7 +68,7 @@ export default G6 => {
   }, 'base-node');
 
   // 扩展圆形节点
-  G6.registerNode('circle-node', {
+  registerNode('circle-node', {
     shapeType: 'circle',
     getShapeStyle(cfg) {
       const r = cfg.style.r || 30;
@@ -82,7 +83,7 @@ export default G6 => {
   }, 'base-node');
 
   // 扩展椭圆形
-  G6.registerNode('ellipse-node', {
+  registerNode('ellipse-node', {
     shapeType: 'ellipse',
     getShapeStyle(cfg) {
       return getStyle.call(this, {
@@ -96,7 +97,7 @@ export default G6 => {
   }, 'base-node');
 
   // 扩展模态节点
-  G6.registerNode('modelRect-node', {
+  registerNode('modelRect-node', {
     shapeType: 'rect',
     getShapeStyle (cfg) {
       const width = cfg.style.width || 200;
@@ -114,7 +115,7 @@ export default G6 => {
   }, 'base-node');
 
   // 扩展菱形
-  G6.registerNode('diamond-node', {
+  registerNode('diamond-node', {
     shapeType: 'path', // 非内置 shape 要指定为path
     getShapeStyle (cfg) {
       const path = this.getPath(cfg);
@@ -145,7 +146,7 @@ export default G6 => {
   }, 'base-node');
 
   // 扩展三角形节点
-  G6.registerNode('triangle-node', {
+  registerNode('triangle-node', {
     shapeType: 'path',
     getShapeStyle(cfg) {
       const path = this.getPath(cfg);

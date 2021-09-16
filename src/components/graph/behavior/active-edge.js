@@ -3,9 +3,10 @@
  * @date 2020/3/15
  * @description 边激活事件
  */
+import { registerBehavior } from '@antv/g6';
 
-export default G6 => {
-  G6.registerBehavior('active-edge', {
+export default () => {
+  registerBehavior('active-edge', {
     getDefaultCfg() {
       return {
         // editMode: false, // 当前的编辑状态

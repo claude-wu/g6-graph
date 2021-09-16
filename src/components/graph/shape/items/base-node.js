@@ -3,7 +3,7 @@
  * @date 2020/3/15
  * @description 注册基础节点, 其他节点都在此基础上继承和扩展
  */
-
+import { registerNode } from '@antv/g6';
 import itemEvents from './item-event';
 import anchorEvent from './anchor-event';
 import defaultStyles from '../defaultStyles';
@@ -47,8 +47,8 @@ function getStyle (options, cfg) {
 /*
  * 注册基础node => 添加锚点/图标 => 绘制node => 初始化node状态 => node动画(设置交互动画)
  */
-export default G6 => {
-  G6.registerNode('base-node', {
+export default () => {
+  registerNode('base-node', {
     getShapeStyle (cfg) {
       const width = cfg.style.width || 80;
       const height = cfg.style.height || 40;

@@ -5,7 +5,11 @@
 
 import registerFactory from './register-factory';
 
-export default (G6, config) => {
+export default config => {
+  if (config.Graph) {
+    return console.warn('不需要再传入G6了! register function no need to receive G6 anymore!');
+  }
+
   const options = Object.assign({
     container:      'canvasPanel',
     width:          window.innerWidth,
@@ -123,7 +127,7 @@ export default (G6, config) => {
     });
 
     // 注册自定义节点/边等
-    registerFactory(G6);
+    registerFactory();
   } else {
     console.warn('未找到注册节点!');
   }

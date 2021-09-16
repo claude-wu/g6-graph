@@ -1,6 +1,7 @@
+import { registerBehavior } from '@antv/g6';
 
-export default G6 => {
-  G6.registerBehavior('canvas-event', {
+export default () => {
+  registerBehavior('canvas-event', {
     getDefaultCfg () {
       return {};
     },

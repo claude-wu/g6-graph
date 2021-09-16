@@ -8,11 +8,11 @@ import shape from './shape/exports';
 import behavior from './behavior/exports';
 import registerEdges from './shape/edges/base-edge';
 
-export default G6 => {
+export default () => {
   // 注册图形
-  shape(G6);
+  shape();
   // 注册行为
-  behavior(G6);
+  behavior();
   // 注册边
-  registerEdges(G6);
+  registerEdges();
 };

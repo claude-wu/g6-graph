@@ -3,7 +3,7 @@
  * @date 2020/3/15
  * @description 注册基础edge, 其他edge都在此基础上继承和扩展
  */
-
+import { registerEdge } from '@antv/g6';
 import animation from './edge-animations';
 import itemEvents from '../items/item-event';
 import hvh_h from './hvh-h.js';
@@ -64,8 +64,8 @@ function stopAnimate (group, animationType) {
 }
 
 // 继承方法
-function inheritEdge (G6, name) {
-  G6.registerEdge(`${name}-edge`, {
+function inheritEdge (name) {
+  registerEdge(`${name}-edge`, {
     drawShape,
     setState,
     runAnimate,
@@ -73,20 +73,20 @@ function inheritEdge (G6, name) {
   }, name);
 }
 
-export default (G6) => {
+export default () => {
   const edgeArray = ['line', 'polyline', 'quadratic', 'cubic', 'arc'];
 
   edgeArray.forEach(edge => {
-    inheritEdge(G6, edge);
+    inheritEdge(edge);
   });
 
-  hvh(G6, {
+  hvh({
     drawShape,
     setState,
     runAnimate,
     stopAnimate,
   });
-  hvh_h(G6, {
+  hvh_h({
     drawShape,
     setState,
     runAnimate,

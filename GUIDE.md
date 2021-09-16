@@ -24,17 +24,17 @@ graph.paint();
 g6.destroy();
 ```
 
-## v0.5+ (推荐)
+## v0.7+ (推荐)
 
 ```js
-import G6 from '@antv/g6';
+import { Graph } from '@antv/g6';
 import registerFactory from 'welabx-g6';
 
-const config = registerFactory(G6, {
+const config = registerFactory({
   // g6 config
 });
 
-const graph = new G6.Graph(config);
+const graph = new Graph(config);
 
 graph.read(data);
 graph.destory();
@@ -47,10 +47,9 @@ graph.destory();
 同样支持 UMD 直接引用了:
 
 ```js
-import G6 from '@antv/g6';
 const registerFactory = require('node_modules/library/welabx-g6').default;
 
-registerFactory(G6, {
+registerFactory({
   // 其他配置
 });
 ```
@@ -184,13 +183,29 @@ graph.addItem('node', model);
 ## 自定义G6实例
 
 ```js
+// 0.7-
 import G6 from '@antv/g6';
 import registerFactory from 'welabx-g6';
 
 const config = registerFactory(G6, {
   // ...
 });
-const graph = new G6.TreeGraph(config);
+const graph = new G6.Graph(config);
+
+graph.read({
+  // ...
+});
+```
+
+```js
+// 0.7+ (推荐)
+import { TreeGraph } from '@antv/g6';
+import registerFactory from 'welabx-g6';
+
+const config = registerFactory({
+  // ...
+});
+const graph = new TreeGraph(config);
 
 graph.read({
   nodes: [{
@@ -271,25 +286,25 @@ graph.read({
 ## 注册自定义节点/边/行为
 
 ```js
-import G6 from '@antv/g6';
+import { TreeGraph, registerNode, registerEdge, registerBehavior } from '@antv/g6';
 import registerFactory from 'welabx-g6';
 
-G6.registerNode('your-node', {
+registerNode('your-node', {
   // your code here
 });
 // 注册自定义边
-G6.registerEdge('your-edge', {
+registerEdge('your-edge', {
   // your code here
 });
 // 注册自定义行为
-G6.registerBehavior('your-behavior', {
+registerBehavior('your-behavior', {
   // your code here
 });
 
-const config = registerFactory(G6, {
+const config = registerFactory({
   // ...
 });
-const graph = new G6.TreeGraph(config);
+const graph = new TreeGraph(config);
 graph.read(data);
 graph.paint();
 // 销毁实例
@@ -303,8 +318,10 @@ graph.destroy();
 
 ```js
 /* file 1 */
-export default G6 => {
-  G6.registerNode('your-unique-node', {
+import { registerNode } from '@antv/g6';
+
+export default () => {
+  registerNode('your-unique-node', {
     shapeType: 'rect',
     draw (cfg, group) {
       return this.drawShape(cfg, group);
@@ -316,7 +333,7 @@ export default G6 => {
 }
 // 二次扩展边
 export default G6 => {
-  G6.registerNode('your-unique-edge', {
+  registerNode('your-unique-edge', {
     stateApplying (name, value, item) {
       // 继承更多状态回调, name 为自定义名称时可用
     },
@@ -326,18 +343,18 @@ export default G6 => {
 
 ```js
 /* file 2 */
-import G6 from '@antv/g6';
+import { TreeGraph } from '@antv/g6';
 import register from 'welabx-g6';
 import nodeStateApply from 'file1.js';
 
-const config = registerFactory(G6, {
+const config = registerFactory({
   // ...
 });
 
 // after registerFactory
-nodeStateApply(G6);
+nodeStateApply();
 
-const graph = new G6.TreeGraph(config);
+const graph = new TreeGraph(config);
 
 graph.read({
   // your data
@@ -347,7 +364,7 @@ graph.read({
 ## 完整案例
 
 ```js
-import G6 from '@antv/g6';
+import { Minimap, Graph } from '@antv/g6';
 import registerFactory from 'welabx-g6';
 
 const data = {
@@ -484,10 +501,10 @@ const data = {
   ],
 }
 
-const minimap = new G6.Minimap({
+const minimap = new Minimap({
   size: [200, 100],
 });
-const confg = registerFactory(G6, {
+const confg = registerFactory({
   container: 'id',
   width: 1000,
   height: 300,
@@ -556,7 +573,7 @@ const confg = registerFactory(G6, {
   // ... 其他G6参数
 });
 
-const graph = new G6.Graph(config);
+const graph = new Graph(config);
 graph.read(data);
 ```
 

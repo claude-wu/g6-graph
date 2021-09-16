@@ -1,5 +1,7 @@
-export default G6 => {
-  G6.registerBehavior('delete-item', {
+import { registerBehavior } from '@antv/g6';
+
+export default () => {
+  registerBehavior('delete-item', {
     getEvents () {
       return {
         'keydown': 'onKeydown',

@@ -1,6 +1,8 @@
 // 点选项目
-export default G6 => {
-  G6.registerBehavior('select-node', {
+import { registerBehavior } from '@antv/g6';
+
+export default () => {
+  registerBehavior('select-node', {
     // 默认配置
     getDefaultCfg () {
       return {

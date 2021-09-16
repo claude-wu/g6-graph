@@ -4,8 +4,10 @@
  * 注册边
  */
 
-export default (G6, cfg) => {
-  G6.registerEdge('hvh-edge', {
+import { registerEdge } from '@antv/g6';
+
+export default (cfg) => {
+  registerEdge('hvh-edge', {
     draw(cfg, group) {
       const xOffset = 40;
       const { startPoint, endPoint } = cfg;
